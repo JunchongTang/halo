@@ -5,6 +5,9 @@
 *.obj
 src/windows/obj/
 
+# 本地打包的 release 上传产物（不入库，dist/ 才是入库的预编译产物）
+release/
+
 # 注意：dist/ 下的预编译产物是有意提交进仓库的（体积极小，开箱即用），不要忽略。
 
 # Xcode
