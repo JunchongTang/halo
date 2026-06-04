@@ -1,6 +1,10 @@
 # macOS
 .DS_Store
 
+# Windows 构建中间产物
+*.obj
+src/windows/obj/
+
 # 注意：dist/ 下的预编译产物是有意提交进仓库的（体积极小，开箱即用），不要忽略。
 
 # Xcode
