@@ -105,7 +105,11 @@ class HaloDelegate: NSObject, NSApplicationDelegate {
     init(cfg: Config) { self.cfg = cfg }
 
     func applicationDidFinishLaunching(_ note: Notification) {
-        guard let screen = NSScreen.main else { NSApp.terminate(nil); return }
+        // 在鼠标光标所在的屏幕发光：多屏时跟随你的注意力位置。
+        // 找不到（极少见）就回退到主屏。
+        let mouse = NSEvent.mouseLocation
+        let chosen = NSScreen.screens.first(where: { $0.frame.contains(mouse) }) ?? NSScreen.main
+        guard let screen = chosen else { NSApp.terminate(nil); return }
         let frame = screen.frame
 
         // —— 透明、无边框、穿透、置顶的全屏窗口 ——

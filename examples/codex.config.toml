@@ -1,6 +1,6 @@
 # notify 是根键，按 TOML 语法必须放在所有 [表] 之前。
 # 把路径换成你本机的绝对路径。
-notify = ["/绝对路径/halo/dist/macos/Halo.app/Contents/MacOS/halo", "--duration", "3", "--style", "rainbow"]
+notify = ["/Applications/Halo.app/Contents/MacOS/halo", "--duration", "3", "--style", "rainbow"]
 
 [tui]
 notifications = true

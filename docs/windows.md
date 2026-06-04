@@ -56,7 +56,7 @@ dist\windows\halo.exe --duration 3 --style pulse --color "#FF3B30"
 - `WS_EX_TOPMOST` —— 盖在普通窗口之上
 - `WS_EX_TOOLWINDOW` + `WS_EX_NOACTIVATE` —— 不进任务栏、不进 Alt+Tab、不抢焦点
 
-窗口本身用 `WS_POPUP`（无边框），覆盖主显示器矩形。
+窗口本身用 `WS_POPUP`（无边框），覆盖鼠标光标所在显示器的矩形（多屏时跟随你的注意力位置，见下文"已知限制"）。
 
 ### GPU 合成链路
 
@@ -121,9 +121,9 @@ notifications = true
 
 ## 已知限制
 
-### 仅主显示器发光
+### 多显示器：在鼠标所在屏发光
 
-当前实现只覆盖主显示器（`MONITOR_DEFAULTTOPRIMARY`），和 macOS 版一致。若要所有显示器同时亮起，需为每块屏各开一个窗口。
+多显示器时，Halo 覆盖**鼠标光标当前所在的那块屏**（`GetCursorPos` + `MonitorFromPoint(..., MONITOR_DEFAULTTONEAREST)`），和 macOS 版一致。若要所有显示器同时亮起，需枚举每个 `HMONITOR` 为每块屏各开一个窗口。
 
 ### 待真机验证
 

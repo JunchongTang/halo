@@ -30,6 +30,7 @@
 #pragma comment(lib, "dxgi.lib")
 #pragma comment(lib, "d2d1.lib")
 #pragma comment(lib, "dcomp.lib")
+#pragma comment(lib, "dxguid.lib")   // 提供 CLSID_D2D1GaussianBlur 等 GUID 定义
 
 using Microsoft::WRL::ComPtr;
 
@@ -232,8 +233,10 @@ int WINAPI wWinMain(HINSTANCE hInst, HINSTANCE, LPWSTR, int) {
 
     SetProcessDpiAwarenessContext(DPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE_V2);
 
-    // 主显示器矩形（物理像素）。当前实现仅覆盖主屏，和 macOS 版一致。
-    HMONITOR mon = MonitorFromPoint(POINT{0, 0}, MONITOR_DEFAULTTOPRIMARY);
+    // 在鼠标光标所在的显示器发光：多屏时跟随你的注意力位置，和 macOS 版一致。
+    POINT cursor = { 0, 0 };
+    GetCursorPos(&cursor);
+    HMONITOR mon = MonitorFromPoint(cursor, MONITOR_DEFAULTTONEAREST);
     MONITORINFO mi = { sizeof(mi) };
     GetMonitorInfo(mon, &mi);
     int x = mi.rcMonitor.left;
