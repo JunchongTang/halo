@@ -1,0 +1,15 @@
+{
+  "hooks": {
+    "Stop": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/绝对路径/halo/dist/macos/Halo.app/Contents/MacOS/halo --duration 3 --style rainbow"
+          }
+        ]
+      }
+    ]
+  }
+}
